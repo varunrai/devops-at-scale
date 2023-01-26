@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "storageDriverName": "ontap-nas",
+  "backendName": "customBackendName",
+  "managementLIF": "172.31.42.72",
+  "dataLIF": "172.31.32.190",
+  "labels": {"k8scluster": "dev1", "backend": "dev1-nasbackend"},
+  "svm": "svm01",
+  "username": "fsxadmin",
+  "password": "SuperSecretPassw0rd",
+  "limitAggregateUsage": "50%",
+  "limitVolumeSize": "50Gi",
+  "nfsMountOptions": "nfsvers=4",
+  "debugTraceFlags": {"api":false, "method":true},
+  "defaults": {
+    "spaceReserve": "volume",
+    "qosPolicy": "premium",
+    "exportPolicy": "default",
+    "snapshotPolicy": "default",
+    "snapshotReserve": "10"
+  }
+}

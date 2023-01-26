@@ -13,4 +13,4 @@ global:
   persistence:
     ontap:
       # ontap data lif IP address
-      dataIP: ""
+      dataIP: "172.31.32.190"

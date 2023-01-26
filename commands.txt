@@ -1,0 +1,271 @@
+    1  minikube start
+    2  minikube addons list
+    3  minikube addons enable dashboard
+    4  minikube addons enable volumesnapshots
+    5  minikube addons enable metrics-server
+    6  minikube version
+    7  minikube addons enable storage-provisioner
+    8  curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+    9  sudo apt-get install apt-transport-https --yes
+   10  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+   11  sudo apt-get update
+   12  sudo apt-get install helm
+   13  git clone https://github.com/varunrai/devops-at-scale.git
+   14  cd devops-at-scale/devops-at-scale/
+   15  ls
+   16  vi values.yaml 
+   17  cd ..
+   18  wget https://github.com/NetApp/trident/releases/download/v20.10.1/trident-installer-20.10.1.tar.gz
+   19  tar -xf trident-installer-20.10.1.tar.gz
+   20  cd trident-installer
+   21  ls
+   22  ./tridentctl install -n trident
+   23  kubectl
+   24  cd ..
+   25  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+   26  ls
+   27  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+   28  kubectl
+   29  cd trident-installer/
+   30  ./tridentctl install -n trident
+   31  cd ..
+   32  rm -Rf trident-installer
+   33  wget https://github.com/NetApp/trident/releases/download/v22.10.0/trident-installer-22.10.0.tar.gz
+   34  tar -xf trident-installer-22.10.0.tar.gz
+   35  cd trident-installer
+   36  ./tridentctl install -n trident
+   37  cd ..
+   38  cd devops-at-scale/devops-at-scale/
+   39  ls
+   40  vi values.yaml 
+   41  helm install devops-at-scale .
+   42  helm version
+   43  kubectl get po
+   44  kubectl get svc
+   45  kubectl expose deployment devops-at-scale-webservice --type=NodePort --port=8080
+   46  kubectl port-forward service/devops-at-scale-webservice 7080:8080
+   47  kubectl port-forward service/devops-at-scale-webservice 7080:80
+   48  kubectl port-forward
+   49  kubectl port-forward -h
+   50  kubectl port-forward --address 0.0.0.0 service/devops-at-scale-webservice 7080:80
+   51  kubectl get svc
+   52  netstat -an | grep 8080
+   53  netstat -an | grep 80
+   54  kubectl port-forward --address 0.0.0.0 service/devops-at-scale-webservice 7080:80
+   55  kubectl get svc
+   56  kubectl port-forward --address 0.0.0.0 service/devops-at-scale-jenkinss 7080:8080
+   57  curl 
+   58  curl https://172.31.42.72/docs/api
+   59  curl -h
+   60  curl https://172.31.42.72/docs/api --no-check-certificate
+   61  curl https://172.31.42.72/docs/api --insecure
+   62  curl https://172.31.42.72/api/storage/aggregates/aggr0_FsxId07e83c0c9fdad4b4e_01 --insecure
+   63  clear
+   64  curl https://172.31.42.72/api/storage/aggregates/aggr0_FsxId07e83c0c9fdad4b4e_01 --insecure --request GET -u fsxadmin:SuperSecretPassw0rd
+   65  curl https://172.31.42.72/api/storage/aggregates --insecure --request GET -u fsxadmin:SuperSecretPassw0rd
+   66  curl https://172.31.42.72/api/storage/aggregates/41e7d91a-9d12-11ed-9eda-bba6df52cbf6 --insecure --request GET -u fsxadmin:SuperSecretPassw0rd
+   67  curl https://172.31.42.72/api/private/cli/storage/aggregates/show-space --insecure --request GET -u fsxadmin:SuperSecretPassw0rd
+   68  curl https://172.31.42.72/api/private/cli/storage/aggregate/show-space --insecure --request GET -u fsxadmin:SuperSecretPassw0rd
+   69  curl https://172.31.42.72/api/private/cli/storage/aggregate/aggr1/show-space --insecure --request GET -u fsxadmin:SuperSecretPassw0rd
+   70  curl https://172.31.42.72/api/private/cli/storage/aggregate/aggr1 --insecure --request GET -u fsxadmin:SuperSecretPassw0rd
+   71  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate
+   72  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregates
+   73  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregates/show
+   74  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregates/show-space
+   75  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/show-space
+   76  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/space
+   77  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/space/all
+   78* curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/show-space
+   79  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/show-space/aggr1/0
+   80  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/show-space/aggr1
+   81  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/show-space/
+   82  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/show-space?fields=physical-used
+   83  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/show-space/instance?fields=physical-used
+   84  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/show-space/aggregate/aggr1?fields=physical-used
+   85  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/show-space?fields=physical-used
+   86  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/show-space?fields=all
+   87  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/show-space?fields=*
+   88  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/show-space/0?fields=*
+   89  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/show-space/1?fields=*
+   90* curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/aggr?fields=*
+   91  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/show-space?fields=physical-used,aggregate-size
+   92  curl --insecure --request GET -u fsxadmin:SuperSecretPassw0rd https://172.31.42.72/api/private/cli/storage/aggregate/show-space?fields=physical-used,aggregate-size,physical-used-percent
+   93  clear
+   94  cd ..
+   95  mv devops-at-scale/ devops-at-scale-v1/
+   96  ls
+   97  git clone https://github.com/varunrai/devops-at-scale.git
+   98  cd devops-at-scale/devops-at-scale/
+   99  ls
+  100  cp ../../devops-at-scale-v1/devops-at-scale/values.yaml . -f
+  101  helm uninstall devops-at-scale .
+  102  helm
+  103  helm uninstall devops-at-scale .
+  104  history
+  105  history | grep helm
+  106  helm uninstall devops-at-scale .
+  107  helm uninstall devops-at-scale
+  108  helm uninstall .
+  109  helm 
+  110  helm list
+  111  helm uninstall devops-at-scale-jenkinss
+  112  kubectl get po
+  113  helm install devops-at-scale .
+  114  vi charts/jenkins-latest/templates/home-pvc.yaml 
+  115  helm
+  116  helm install devops-at-scale . --debug
+  117  vi charts/jenkins-latest/templates/home-pvc.yaml 
+  118  helm install devops-at-scale . --debug
+  119  vi charts/jenkins-latest/templates/home-pvc.yaml 
+  120  helm install devops-at-scale . --debug
+  121  helm uninstall devops-at-scale
+  122  helm install devops-at-scale . --debug
+  123  rm -Rf charts/jenkins
+  124  clear
+  125  helm uninstall devops-at-scale
+  126  helm install devops-at-scale . --debug
+  127  vi charts/jenkins-latest/templates/home-pvc.yaml 
+  128  vi charts/jenkins-latest/values.yaml 
+  129  helm uninstall devops-at-scale
+  130  helm install devops-at-scale . --debug
+  131  kubectl get po
+  132  kubectl describe po devops-at-scale-jenkins-0
+  133  kubectl logs devops-at-scale-jenkins-0
+  134  kubectl logs devops-at-scale-jenkins-0 -c init
+  135  helm uninstall devops-at-scale
+  136  vi charts/jenkins-latest/values.yaml 
+  137  helm install devops-at-scale . --debug
+  138  kubectl get po
+  139  kubectl logs devops-at-scale-jenkins-0 -c init
+  140  kubectl logs devops-at-scale-jenkins-0 
+  141  kubectl get po
+  142  history | grep port-
+  143  kubectl port-forward --address 0.0.0.0 service/devops-at-scale-webservice 7080:80
+  144  kubectl get svc -o wide
+  145  vi charts/jenkins-latest/values.yaml 
+  146  kubectl get svc -o wide
+  147  kubectl logs devops-at-scale-webservice
+  148  kubectl logs devops-at-scale-webservice-748998bb79-nklct
+  149  clear
+  150  kubectl logs devops-at-scale-webservice-748998bb79-nklct -tail=100
+  151  kubectl logs devops-at-scale-webservice-748998bb79-nklct --tail=100
+  152  kubectl logs -h
+  153  kubectl logs devops-at-scale-webservice-748998bb79-nklct -f
+  154  vi ../web_service/web_service/helpers/helpers.py 
+  155  helm uninstall devops-at-scale
+  156  helm install devops-at-scale . --debug
+  157  kubectl logs devops-at-scale-webservice-748998bb79-nklct -f
+  158  kubectl get po
+  159  kubectl logs -f devops-at-scale-webservice-748998bb79-795qm
+  160  kubectl get po
+  161  kubectl exec --stdin --tty devops-at-scale-webservice-748998bb79-795qm -- /bin/bash
+  162  kubectl cp ../web_service/web_service/helpers/helpers.py default/devops-at-scale-webservice-748998bb79-795qm:/usr/src/app/web_service/helpers/helpers.py
+  163  kubectl get po
+  164  kubectl logs -f devops-at-scale-webservice-748998bb79-795qm
+  165  vi ../web_service/web_service/helpers/helpers.py 
+  166  kubectl logs -f devops-at-scale-webservice-748998bb79-795qm
+  167  kubectl get svc
+  168  export NODE_IP=$(kubectl get nodes -o jsonpath="{.items[0].status.addresses[0].address}")
+  169  export SERVICE_PORT=$(kubectl get -o jsonpath="{.spec.ports[0].nodePort}" services {{.Release.Name}}-webservice)
+  170  export SERVICE_URL=$NODE_IP:$SERVICE_PORT
+  171  kubectl get nodes -o
+  172  kubectl get nodes 
+  173  kubectl get nodes services
+  174  kubectl get nodes -o jsonpath="{.items[0].status.addresses[0].address
+  175  kubectl get nodes -o jsonpath="{.items[0].status.addresses[0].address}
+  176  kubectl get nodes -o jsonpath="{.items[0].status.addresses[0].address}"
+  177  echo $NODE_IP
+  178  kubectl get -o
+  179  kubectl get services
+  180  export SERVICE_PORT=$(kubectl get -o jsonpath="{.spec.ports[0].nodePort}" services {{.Release.Name}}-webservice)
+  181  kubectl logs -f devops-at-scale-webservice-748998bb79-795qm
+  182  vi charts/jenkins-latest/templates/jenkins-agent-svc.yaml 
+  183  vi charts/jenkins-latest/templates/jenkins-controller-svc.yaml 
+  184  vi charts/jenkins-latest/templates/config.yaml 
+  185  ls
+  186  vi charts/jenkins-latest/values.yaml 
+  187  vi charts/jenkins-latest/Chart.yaml 
+  188  vi charts/jenkins-latest/values.yaml 
+  189  helm uninstall devops-at-scale
+  190  helm install devops-at-scale . --debug
+  191  vi charts/jenkins-latest/values.yaml 
+  192  helm install devops-at-scale . --debug
+  193* vi charts/jenkins-latest/templa
+  194  mv charts/jenkins-latest/ charts/jenkins
+  195  helm install devops-at-scale . --debug
+  196  vi charts/jenkins-latest/values.yaml 
+  197  vi charts/jenkins/values.yaml 
+  198  helm install devops-at-scale . --debug
+  199  vi charts/jenkins/values.yaml 
+  200  vi charts/jenkins/templates/_helpers.tpl 
+  201  kubectl get po
+  202  kubectl logs devops-at-scale-jenkins-0 -f
+  203  kubectl get po
+  204  kubectl logs devops-at-scale-webservice-748998bb79-sgh7g
+  205  history | grep bash
+  206  kubectl get po
+  207  kubectl exec --stdin --tty devops-at-scale-webservice-748998bb79-sgh7g -- /bin/bash
+  208  kubectl get svc
+  209  kubectl logs devops-at-scale-webservice-748998bb79-sgh7g
+  210  kubectl exec --stdin --tty devops-at-scale-webservice-748998bb79-sgh7g -- /bin/bash
+  211  vi ../web_service/web_service/kub/KubernetesAPI.py 
+  212  history | kubectl cp
+  213  history | grep kubectl cp
+  214  history | grep kubectl
+  215  history | grep cp
+  216  kubectl cp ../web_service/web_service/kub/KubernetesAPI.py default/devops-at-scale-webservice-748998bb79-sgh7g:/usr/src/app/web_service/kub/KubernetesAPI.py
+  217  kubectl exec --stdin --tty devops-at-scale-webservice-748998bb79-sgh7g -- /bin/bash
+  218  kubectl get po
+  219  kubectl logs devops-at-scale-webservice-748998bb79-sgh7g
+  220  kubectl logs devops-at-scale-webservice-748998bb79-sgh7g -f
+  221  vi ../web_service/web_service/kub/KubernetesAPI.py 
+  222  vi ../web_service/web_service/helpers/helpers.py 
+  223  helm uninstall devops-at-scale
+  224  helm install devops-at-scale . --debug
+  225  echo $SERVICE_URL
+  226  kubectl get po
+  227  kubectl logs devops-at-scale-webservice-748998bb79-cs5zx -f
+  228  kubectl get svc
+  229  vi charts/jenkins/values.yaml 
+  230  helm uninstall devops-at-scale
+  231  helm install devops-at-scale . --debug
+  232  kubectl get po
+  233  kubectl get svc
+  234  kubectl logs devops-at-scale-webservice-748998bb79-r69t5
+  235  kubectl get po
+  236  kubectl logs devops-at-scale-gitlab-87bf7c846-st2s5
+  237  kubectl logs devops-at-scale-gitlab-87bf7c846-st2s5 -c init
+  238  kubectl logs devops-at-scale-gitlab-87bf7c846-st2s5 
+  239  kubectl describe po devops-at-scale-gitlab-87bf7c846-st2s5 
+  240  vi charts/gitlab/values.yaml 
+  241  vi charts/gitlab/templates/gitlab-pvc.yaml 
+  242  vi charts/gitlab/values.yaml 
+  243  vi charts/gitlab/templates/gitlab-pvc.yaml 
+  244* kubectl describe po devops-at-scale-748998bb79-sjtx
+  245  kubectl get po
+  246  kubectl get po -n trident
+  247  sudo su
+  248  cd ..
+  249  cd ../trident-installer/
+  250  ./tridentctl -n trident create backend -f backend-ontap-nas.json 
+  251  cd ..
+  252  kubectl get po
+  253  cd devops-at-scale/devops-at-scale/
+  254  helm uninstall devops-at-scale
+  255  helm install devops-at-scale . --debug
+  256  kubectl get po
+  257  kubectl logs devops-at-scale-webservices-748998bb79-sjtx7
+  258  kubectl logs devops-at-scale-webservice-748998bb79-sjtx7
+  259  kubectl get svc
+  260  kubectl get po
+  261  kubectl descrive svc
+  262  kubectl describe svc
+  263  kubectl describe svc devops-at-scale-jenkins
+  264  kubectl describe svc
+  265  kubectl get po
+  266  kubectl logs devops-at-scale-jenkins-0
+  267  kubectl get svc
+  268  cd ..
+  269  git add .
+  270  git status
+  271  history > commands.txt

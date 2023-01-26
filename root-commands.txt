@@ -1,0 +1,18 @@
+    1  cd ..
+    2  ls
+    3  cd trident-installer
+    4  ls
+    5  cp sample-input/backends-samples/ontap-nas/backend-ontap-nas.json .
+    6  vi backend-ontap-nas.json 
+    7  ./tridentctl -n trident create backend -f backend-ontap-nas.json 
+    8  ./tridentctl 
+    9  ./tridentctl create backend 
+   10  vi backend-ontap-nas.json 
+   11  ./tridentctl -n trident create backend -f backend-ontap-nas.json 
+   12  mkdir /root/.kube
+   13  kubectl
+   14  kubectl get po
+   15  minikube 
+   16  exit
+   17  history
+   18  history > root-commands.txt

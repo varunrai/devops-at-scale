@@ -218,14 +218,20 @@ def get_pipelines_for_dashboard():
     pipeline_documents = Database.get_documents_by_type(
         database, doc_type='project')
     pipelines_data = list()
-    jenkins_obj = connect_jenkins()
-    for pipeline in pipeline_documents:
-        last_build_status = jenkins_obj.get_last_build_status(job_name=pipeline['name'])
-        # both scm and jenkins URLs are set as part of pipeline_create
-        pipelines_data.append({'pipeline_name': pipeline['name'],
-                               'scm_url': pipeline['scm_url'],
-                               'jenkins_url': pipeline['jenkins_url'],
-                               'last_build': last_build_status})
+    
+    try:
+        jenkins_obj = connect_jenkins()
+        for pipeline in pipeline_documents:
+            last_build_status = jenkins_obj.get_last_build_status(job_name=pipeline['name'])
+            # both scm and jenkins URLs are set as part of pipeline_create
+            pipelines_data.append({'pipeline_name': pipeline['name'],
+                                'scm_url': pipeline['scm_url'],
+                                'jenkins_url': pipeline['jenkins_url'],
+                                'last_build': last_build_status})
+    except Exception, e:
+        logging.error('Failed at Jenkins: ' + str(e))
+        
+
     return pipelines_data
 
 

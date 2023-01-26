@@ -664,6 +664,8 @@ class KubernetesAPI:
         try:
             # Get nodeport for service
             response = self.api.read_namespaced_service(name=service_name, namespace=self.namespace)
+            logging.error(service_name)
+            logging.error(self.service_type)
             # determine service service_type
             if self.service_type == 'LoadBalancer':
                 ip = response.status.load_balancer.ingress[0].ip

@@ -5,6 +5,8 @@ apiVersion: v1
 metadata:
 {{- if .Values.persistence.annotations }}
   annotations:
+    trident.netapp.io/reclaimPolicy: "Retain"
+    trident.netapp.io/exportPolicy: "default"
 {{ toYaml .Values.persistence.annotations | indent 4 }}
 {{- end }}
   name: {{ template "jenkins.fullname" . }}
@@ -20,8 +22,6 @@ metadata:
 {{- if .Values.persistence.labels }}
 {{ toYaml .Values.persistence.labels | indent 4 }}
 {{- end }}
-    trident.netapp.io/reclaimPolicy: "Retain"
-    trident.netapp.io/exportPolicy: "default"
 spec:
   accessModes:
     - {{ .Values.persistence.accessMode | quote }}
@@ -37,24 +37,3 @@ spec:
 {{- end }}
 {{- end }}
 {{- end }}
-
-{{- if not .Values.persistence.existingClaim -}}
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: "{{.Release.Name}}-jenkins-pvc"
-  namespace: {{ .Values.global.NameSpace }}
-  annotations:
-    {{- if .Values.StorageClass}}
-    volume.beta.kubernetes.io/storage-class: "{{ .Values.StorageClass }}"
-    {{- end }}
-    trident.netapp.io/reclaimPolicy: "Retain"
-    trident.netapp.io/exportPolicy: "default"
-spec:
-  # use 'ReadWriteMany' if there is a need to parallelize the builds (multiple Jenkins agents running parallel)
-  accessModes:
-    - "ReadWriteOnce"
-  resources:
-    requests:
-      storage: "{{ .Values.persistence.volumeSize }}"
-{{- end -}}
